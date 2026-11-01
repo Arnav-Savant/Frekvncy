@@ -5,7 +5,7 @@ export const COMMUNITY_CHAT_URL = 'https://chat.whatsapp.com/EcYa7bY2Li93aJ0anOl
 export const EMAILS = ['mugdharoy2291@gmail.com', 'frekvncy@gmail.com']
 
 export const DIWALI = {
-  startsAt: '2026-11-06T17:00:00+05:30',
+  startsAt: '2026-11-07T17:00:00+05:30',
   price: 799,
   maxPasses: 5,
   upiId: 'mugdharoy2291@oksbi',

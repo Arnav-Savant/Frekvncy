@@ -81,7 +81,7 @@ export default function Hero() {
         <div className="deva" lang="hi">शुभ दीपावली</div>
         <h1>Diwali<br />Bash '26</h1>
         <div className="meta">
-          <span className="label" style={{ color: 'var(--gold)' }}>Fri 06 Nov · 5 PM till late</span>
+          <span className="label" style={{ color: 'var(--gold)' }}>Sat 07 Nov · 5 PM till late</span>
           <span className="label" style={{ color: 'var(--gold)' }}>Private villa · Lucknow</span>
         </div>
         <p className="lede">A whole villa, glowing diyas, loud card tables, 2000s Bollywood and a lot of good people. One night only.</p>

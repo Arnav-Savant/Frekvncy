@@ -21,7 +21,7 @@ export default function Events() {
                 <Lantern len={l.len} scale={l.s} glow={18} />
               </div>
             ))}
-            <div className="ttl"><span>Event 001 · Fri 06 Nov</span><b>Diwali<br />Bash '26</b></div>
+            <div className="ttl"><span>Event 001 · Sat 07 Nov</span><b>Diwali<br />Bash '26</b></div>
             <div className="drow">
               {Array.from({ length: 7 }, (_, i) => <Diya key={i} simple size={58 - Math.abs(i - 3) * 7} delay={-i * 0.37} />)}
             </div>
@@ -31,7 +31,7 @@ export default function Events() {
             <h3>Lights, card tables <span className="it">and good people.</span></h3>
             <p>A whole villa for one night. Diyas, Teen Patti, Bollywood Tambola, sparklers at golden hour and 2000s Bollywood on the speakers.</p>
             <dl>
-              <dt>When</dt><dd>Fri 06 Nov · 5 PM till late</dd>
+              <dt>When</dt><dd>Sat 07 Nov · 5 PM till late</dd>
               <dt>Where</dt><dd>Private villa, Lucknow</dd>
               <dt>Pass</dt><dd>₹799 per person</dd>
               <dt>Wear</dt><dd>Ethnic or Indo-Western</dd>

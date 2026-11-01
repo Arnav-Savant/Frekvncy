@@ -60,7 +60,7 @@ export default function Pass() {
 
   const message = () => {
     const lines = [
-      `Hey Mugdha! I've just paid ₹${inr(amount)} for ${n} ${n > 1 ? 'passes' : 'pass'} to the Diwali Bash on Fri 6 Nov 🪔`,
+      `Hey Mugdha! I've just paid ₹${inr(amount)} for ${n} ${n > 1 ? 'passes' : 'pass'} to the Diwali Bash on Sat 7 Nov 🪔`,
       '',
       `Name: ${form.name.trim()}`,
       `Phone: ${form.phone.trim()}`,
@@ -91,7 +91,7 @@ export default function Pass() {
         <div className="ticket">
           <div className="t-head">
             <Mandala className="mandala" size={300} r={110} colors={['#ffe1b0', '#fff4dc', '#ffe1b0', '#fff4dc']} />
-            <span className="label">Admit one · Diwali Bash '26 · Fri 06 Nov</span>
+            <span className="label">Admit one · Diwali Bash '26 · Sat 07 Nov</span>
             <h2 style={{ marginTop: 8 }}>Get your pass</h2>
             <span className="label" style={{ display: 'block', marginTop: 10 }}>Closes Thu 05 Nov</span>
           </div>
