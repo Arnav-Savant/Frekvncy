@@ -1,0 +1,4 @@
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #0b0a09; }
+.page-home, .page-diwali { min-height: 100vh; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
