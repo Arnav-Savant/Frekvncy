@@ -27,7 +27,7 @@ export default function Events() {
             </div>
           </div>
           <div className="info">
-            <span className="tag">Booking open · closes 05 Nov</span>
+            <span className="tag">Booking open · closes 06 Nov</span>
             <h3>Lights, card tables <span className="it">and good people.</span></h3>
             <p>A whole villa for one night. Diyas, Teen Patti, Bollywood Tambola, sparklers at golden hour and 2000s Bollywood on the speakers.</p>
             <dl>

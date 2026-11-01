@@ -93,7 +93,7 @@ export default function Pass() {
             <Mandala className="mandala" size={300} r={110} colors={['#ffe1b0', '#fff4dc', '#ffe1b0', '#fff4dc']} />
             <span className="label">Admit one · Diwali Bash '26 · Sat 07 Nov</span>
             <h2 style={{ marginTop: 8 }}>Get your pass</h2>
-            <span className="label" style={{ display: 'block', marginTop: 10 }}>Closes Thu 05 Nov</span>
+            <span className="label" style={{ display: 'block', marginTop: 10 }}>Closes Fri 06 Nov</span>
           </div>
           <div className="perf" />
           <div className="t-body">

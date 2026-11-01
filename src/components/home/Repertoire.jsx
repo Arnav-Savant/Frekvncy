@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { prefersReducedMotion } from '../../hooks.js'
 
 const S = { fill: 'none', stroke: '#efe8dc', strokeWidth: 1.2 }
 
@@ -133,65 +134,100 @@ const FORMATS = [
 
 const META_LABELS = ['Hours', 'Mood', 'Format']
 
+// How much page scroll (in viewport heights) each panel gets before the next opens.
+const STEP_VH = 70
+
 export default function Repertoire() {
   const [open, setOpen] = useState(0)
-  const timer = useRef(0)
-  const hoverable = typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches
+  const track = useRef(null)
   const refs = useRef([])
+  const n = FORMATS.length
+
+  // Scroll progress through the track picks the open panel.
+  useEffect(() => {
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const el = track.current
+      if (!el) return
+      const run = el.offsetHeight - window.innerHeight
+      const p = Math.min(1, Math.max(0, -el.getBoundingClientRect().top / run))
+      setOpen(Math.min(n - 1, Math.floor(p * n)))
+    }
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [n])
+
+  // Clicking or focusing a panel scrolls to the middle of its step, which then opens it.
+  const goTo = (i) => {
+    const el = track.current
+    const run = el.offsetHeight - window.innerHeight
+    const top = el.getBoundingClientRect().top + window.scrollY + ((i + 0.5) / n) * run
+    window.scrollTo({ top, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+  }
 
   const onKey = (e) => {
-    const n = FORMATS.length
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); refs.current[(open + 1) % n]?.focus() }
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); refs.current[(open - 1 + n) % n]?.focus() }
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); refs.current[Math.min(n - 1, open + 1)]?.focus() }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); refs.current[Math.max(0, open - 1)]?.focus() }
   }
 
   return (
-    <section id="nights" style={{ paddingTop: 0 }}>
-      <div className="wrap">
-        <div className="sh">
-          <div><span className="label">The repertoire</span><h2>Eight formats.<br />One <span className="it">frequency.</span></h2></div>
-          <p style={{ maxWidth: 340, color: '#b9afa3' }}>
-            From blacked-out techno rooms to candlelit poetry and sober sunrise raves. Every format is small, hosted and members first.
-          </p>
-        </div>
+    <section id="nights" className="rep-scroll" ref={track} style={{ height: `calc(100svh + ${(n - 1) * STEP_VH}svh)` }}>
+      <div className="rep-sticky">
+        <div className="wrap">
+          <div className="sh">
+            <div><span className="label">The repertoire</span><h2>Eight formats.<br />One <span className="it">frequency.</span></h2></div>
+            <p style={{ maxWidth: 340, color: '#b9afa3' }}>
+              From blacked-out techno rooms to candlelit poetry and sober sunrise raves. Every format is small, hosted and members first.
+            </p>
+          </div>
 
-        <div className="rep" onKeyDown={onKey}>
-          {FORMATS.map((f, i) => (
-            <article
-              key={f.b}
-              ref={(el) => { refs.current[i] = el }}
-              className={`pn${open === i ? ' on' : ''}`}
-              tabIndex={0}
-              aria-expanded={open === i}
-              style={{ '--c': f.c, '--bg': f.bg, '--glow': f.glow }}
-              onClick={() => setOpen(i)}
-              onFocus={() => setOpen(i)}
-              onMouseEnter={hoverable ? () => { clearTimeout(timer.current); timer.current = setTimeout(() => setOpen(i), 120) } : undefined}
-              onMouseLeave={hoverable ? () => clearTimeout(timer.current) : undefined}
-            >
-              <div className="pn-col" aria-hidden={open === i}>
-                <span className="no">{String(i + 1).padStart(2, '0')}</span>
-                <span className="vt">{f.vt ? <span className="it">{f.vt}</span> : <>{f.a} <span className="it">{f.b}</span></>}</span>
-                <i className="dot" />
-              </div>
-              <div className="pn-body">
-                <div className="pn-art" aria-hidden="true">{f.art}</div>
-                <div className="pn-txt">
-                  <span className="kick">{f.kick}{f.soon && <> · <span className="soon">Coming soon</span></>}</span>
-                  <h3>{f.a}<span className="it">{f.b}</span></h3>
-                  <p>{f.desc}</p>
-                  <dl className="meta">
-                    {f.meta.map((m, k) => <div key={k}><dt>{META_LABELS[k]}</dt><dd>{m}</dd></div>)}
-                  </dl>
-                  {f.link && <a className="pn-link" href={f.link.href}>{f.link.label}</a>}
+          <div className="rep" onKeyDown={onKey}>
+            {FORMATS.map((f, i) => (
+              <article
+                key={f.b}
+                ref={(el) => { refs.current[i] = el }}
+                className={`pn${open === i ? ' on' : ''}`}
+                tabIndex={0}
+                aria-expanded={open === i}
+                style={{ '--c': f.c, '--bg': f.bg, '--glow': f.glow }}
+                onClick={() => open !== i && goTo(i)}
+                onFocus={() => open !== i && goTo(i)}
+              >
+                <div className="pn-col" aria-hidden={open === i}>
+                  <span className="no">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="vt">{f.vt ? <span className="it">{f.vt}</span> : <>{f.a} <span className="it">{f.b}</span></>}</span>
+                  <i className="dot" />
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div className="rep-foot">
-          <span className="hint">{hoverable ? 'Hover or tap a panel to open it' : 'Tap a panel to open it'}</span>
-          <div className="pips">{FORMATS.map((f, i) => <i key={f.b} className={open === i ? 'on' : ''} />)}</div>
+                <div className="pn-body">
+                  <div className="pn-art" aria-hidden="true">{f.art}</div>
+                  <div className="pn-txt">
+                    <span className="kick">{f.kick}{f.soon && <> · <span className="soon">Coming soon</span></>}</span>
+                    <h3>{f.a}<span className="it">{f.b}</span></h3>
+                    <p>{f.desc}</p>
+                    <dl className="meta">
+                      {f.meta.map((m, k) => <div key={k}><dt>{META_LABELS[k]}</dt><dd>{m}</dd></div>)}
+                    </dl>
+                    {f.link && <a className="pn-link" href={f.link.href}>{f.link.label}</a>}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="rep-foot">
+            <span className="hint">{open < n - 1 ? 'Keep scrolling to open the next format' : 'Scroll on to see what’s on air'}</span>
+            <div className="right">
+              <span className="count"><b>{String(open + 1).padStart(2, '0')}</b> / {String(n).padStart(2, '0')}</span>
+              <div className="pips">{FORMATS.map((f, i) => <i key={f.b} className={open === i ? 'on' : ''} />)}</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
