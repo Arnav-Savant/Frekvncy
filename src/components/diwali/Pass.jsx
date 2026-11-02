@@ -9,7 +9,8 @@ const inr = (n) => n.toLocaleString('en-IN')
 const upiUrl = (amount) =>
   `upi://pay?pa=${DIWALI.upiId}&pn=${encodeURIComponent(DIWALI.payee)}&am=${amount}.00&cu=INR&tn=${encodeURIComponent('Diwali Bash 26')}`
 
-// QR for the exact total; falls back to the original fixed ₹799 code if generation fails.
+// QR for the exact total. Returns null if generation fails, so the UPI ID is shown on its own
+// rather than a code for the wrong amount.
 function useUpiQr(amount) {
   return useMemo(() => {
     try {
@@ -18,7 +19,7 @@ function useUpiQr(amount) {
       qr.make()
       return qr.createDataURL(6, 2)
     } catch {
-      return '/assets/gpay-qr.jpg'
+      return null
     }
   }, [amount])
 }
@@ -117,7 +118,7 @@ export default function Pass() {
                 <span className="label">Step 2</span>
                 <h3>Pay with any UPI app</h3>
                 <div className="qr">
-                  <img src={qr} alt={`UPI QR code to pay ₹${inr(amount)} to ${DIWALI.payee}`} />
+                  {qr && <img src={qr} alt={`UPI QR code to pay ₹${inr(amount)} to ${DIWALI.payee}`} />}
                   <div style={{ fontSize: 14 }}>
                     Scan to pay <b>₹{inr(amount)}</b>.
                     <div className="upi">

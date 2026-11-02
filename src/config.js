@@ -6,7 +6,7 @@ export const EMAILS = ['mugdharoy2291@gmail.com', 'frekvncy@gmail.com']
 
 export const DIWALI = {
   startsAt: '2026-11-07T17:00:00+05:30',
-  price: 799,
+  price: 999,
   maxPasses: 5,
   upiId: 'mugdharoy2291@oksbi',
   payee: 'Mugdha Roy',

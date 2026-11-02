@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Diya, Mandala } from '../shared/DiwaliArt.jsx'
-import { EMAILS, HOST_PHONE_DISPLAY, waLink } from '../../config.js'
+import { DIWALI, EMAILS, HOST_PHONE_DISPLAY, waLink } from '../../config.js'
 
 const G = { fill: 'none', stroke: '#e8c27a', strokeWidth: 1.5 }
 
@@ -19,7 +19,7 @@ export function Bar() {
 const FACTS = [
   { k: 'When', b: 'Sat 07 Nov', p: '5 PM till late', icon: <svg width="30" height="30" viewBox="0 0 30 30" {...G}><rect x="4" y="6" width="22" height="20" rx="2" /><path d="M4 12h22M10 3v6M20 3v6" /></svg> },
   { k: 'Where', b: 'Private villa', p: 'Lucknow, shared on confirmation', icon: <svg width="30" height="30" viewBox="0 0 30 30" {...G}><path d="M5 27V13l10-8 10 8v14z" /><path d="M12 27v-7a3 3 0 016 0v7" /></svg> },
-  { k: 'Pass', b: '₹799', p: 'Per person, all in', icon: <svg width="30" height="30" viewBox="0 0 30 30" {...G}><path d="M4 9h22v4a2 2 0 000 4v4H4v-4a2 2 0 000-4z" /><path d="M18 9v12" strokeDasharray="2 2" /></svg> },
+  { k: 'Pass', b: `₹${DIWALI.price}`, p: 'Per person, all in', icon: <svg width="30" height="30" viewBox="0 0 30 30" {...G}><path d="M4 9h22v4a2 2 0 000 4v4H4v-4a2 2 0 000-4z" /><path d="M18 9v12" strokeDasharray="2 2" /></svg> },
   { k: 'Wear', b: 'Ethnic', p: 'Or Indo-Western', icon: <svg width="30" height="30" viewBox="0 0 30 30" {...G}><path d="M11 4l4 3 4-3 6 4-3 5-2-1v14H10V12l-2 1-3-5z" /></svg> },
   { k: 'Drinks', b: 'BYOB', p: 'Mixers on us', icon: <svg width="30" height="30" viewBox="0 0 30 30" {...G}><path d="M9 4h12l-2 11a4 4 0 01-8 0z" /><path d="M15 19v7M10 26h10" /></svg> },
   { k: 'Book by', b: 'Fri 06 Nov', p: 'Limited spots', hi: true, icon: <svg width="30" height="30" viewBox="0 0 30 30" {...G} stroke="#f2a033"><circle cx="15" cy="16" r="10" /><path d="M15 10v6l4 3" /></svg> },

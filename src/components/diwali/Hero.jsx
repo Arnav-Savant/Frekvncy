@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Diya, Lantern, Mandala } from '../shared/DiwaliArt.jsx'
+import { DIWALI } from '../../config.js'
 
 function useWidth() {
   const [w, setW] = useState(() => window.innerWidth)
@@ -86,7 +87,7 @@ export default function Hero() {
         </div>
         <p className="lede">A whole villa, glowing diyas, loud card tables, 2000s Bollywood and a lot of good people. One night only.</p>
         <div className="cta">
-          <a className="btn" href="#pass">Get your pass · ₹799</a>
+          <a className="btn" href="#pass">Get your pass · ₹{DIWALI.price}</a>
           <a className="btn ghost" href="#program">See the night</a>
         </div>
       </div>

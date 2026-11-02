@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Diya, Lantern } from '../shared/DiwaliArt.jsx'
+import { DIWALI } from '../../config.js'
 
 const LANTERNS = [
   { x: 12, len: 70, s: 0.8 },
@@ -33,7 +34,7 @@ export default function Events() {
             <dl>
               <dt>When</dt><dd>Sat 07 Nov · 5 PM till late</dd>
               <dt>Where</dt><dd>Private villa, Lucknow</dd>
-              <dt>Pass</dt><dd>₹799 per person</dd>
+              <dt>Pass</dt><dd>₹{DIWALI.price} per person</dd>
               <dt>Wear</dt><dd>Ethnic or Indo-Western</dd>
             </dl>
             <div className="go"><span>See the full night & get a pass</span><span className="a">→</span></div>
