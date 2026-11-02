@@ -9,7 +9,7 @@ export function Bar() {
     <div className="bar">
       <div className="wrap">
         <Link className="brand" to="/">← frek<span style={{ color: '#ff5b2e' }}>v</span>ncy</Link>
-        <span className="deadline">Registration closes Fri 06 Nov</span>
+        <span className="deadline">Registration closes Wed 04 Nov</span>
         <a className="btn sm" href="#pass">Get a pass</a>
       </div>
     </div>
@@ -22,7 +22,7 @@ const FACTS = [
   { k: 'Pass', b: `₹${DIWALI.price}`, p: 'Per person, all in', icon: <svg width="30" height="30" viewBox="0 0 30 30" {...G}><path d="M4 9h22v4a2 2 0 000 4v4H4v-4a2 2 0 000-4z" /><path d="M18 9v12" strokeDasharray="2 2" /></svg> },
   { k: 'Wear', b: 'Ethnic', p: 'Or Indo-Western', icon: <svg width="30" height="30" viewBox="0 0 30 30" {...G}><path d="M11 4l4 3 4-3 6 4-3 5-2-1v14H10V12l-2 1-3-5z" /></svg> },
   { k: 'Drinks', b: 'BYOB', p: 'Mixers on us', icon: <svg width="30" height="30" viewBox="0 0 30 30" {...G}><path d="M9 4h12l-2 11a4 4 0 01-8 0z" /><path d="M15 19v7M10 26h10" /></svg> },
-  { k: 'Book by', b: 'Fri 06 Nov', p: 'Limited spots', hi: true, icon: <svg width="30" height="30" viewBox="0 0 30 30" {...G} stroke="#f2a033"><circle cx="15" cy="16" r="10" /><path d="M15 10v6l4 3" /></svg> },
+  { k: 'Book by', b: 'Wed 04 Nov', p: 'Limited spots', hi: true, icon: <svg width="30" height="30" viewBox="0 0 30 30" {...G} stroke="#f2a033"><circle cx="15" cy="16" r="10" /><path d="M15 10v6l4 3" /></svg> },
 ]
 
 export function Facts() {
